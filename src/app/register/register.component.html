@@ -1,0 +1,108 @@
+<section class="testimonial py-5" id="testimonial">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-4 py-5 bg-primary text-white text-center ">
+        <div class=" ">
+          <div class="card-body">
+            <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+            <h2 class="py-3">Registration</h2>
+            <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto
+              patrioque an per, lucilius pertinacia eu vel.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 py-5 border">
+        <h4 class="pb-4">Please fill with your details</h4>
+        <div>
+          <div class="alert alert-danger" *ngIf="res['ok']==false">{{res['message']}}</div>
+          <div *ngIf="regF.controls['FullName'].hasError('required') && (regF.controls['FullName'].dirty || regF.controls['FullName'].touched)" class="alert alert-danger">
+            Name field is required
+          </div>
+          <div *ngIf="regF.controls['FullName'].hasError('pattern') && (regF.controls['FullName'].dirty || regF.controls['FullName'].touched)" class="alert alert-danger">
+           Invalid Name
+          </div>
+          <div *ngIf="regF.controls['Email'].hasError('required') && (regF.controls['Email'].dirty || regF.controls['Email'].touched)" class="alert alert-danger">
+            Email field is required
+          </div>
+          <div *ngIf="regF.controls['Email'].hasError('pattern') && (regF.controls['Email'].dirty || regF.controls['Email'].touched)" class="alert alert-danger">
+            Invalid Email
+          </div>
+          <div *ngIf="regF.controls['State'].hasError('required') && (regF.controls['State'].dirty || regF.controls['State'].touched)" class="alert alert-danger">
+            State field is required
+          </div>
+        </div>
+        <form [formGroup]="regF" (ngSubmit)="Register(regF.value)">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input id="Full Name" [formControl]="regF.controls['FullName']" name="FullName" placeholder="Full Name" class="form-control" type="text">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="email" [formControl]="regF.controls['Email']" name="Email" class="form-control" id="inputEmail4" placeholder="Email">
+
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input id="Mobile No." [formControl]="regF.controls['MobileNo']" name="MobileNo" placeholder="Mobile No." class="form-control" type="text">
+              <div *ngIf="regF.controls['MobileNo'].hasError('required') && (regF.controls['MobileNo'].dirty || regF.controls['MobileNo'].touched)" class="alert alert-danger">
+                This field is required
+              </div>
+              <div *ngIf="regF.controls['MobileNo'].hasError('pattern') && (regF.controls['MobileNo'].dirty || regF.controls['MobileNo'].touched)" class="alert alert-danger">
+                Invalid Mobile Number
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <select id="inputState" [formControl]="regF.controls['State']" name="State" class="form-control">
+                <option disabled selected>Choose ...</option>
+                <option value="A"> New Buyer</option>
+                <option value="B"> Auction</option>
+                <option value="C"> Complaint</option>
+                <option value="D"> Feedback</option>
+              </select>
+
+            </div>
+            <div class="form-group col-md-12">
+              <textarea id="comment" [formControl]="regF.controls['Comment']" name="Comment" cols="40" rows="5" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" [formControl]="regF.controls['Agree']" name="Agree" type="checkbox" value="" id="invalidCheck2" required>
+                  <label class="form-check-label" for="invalidCheck2">
+                    <small>By clicking Submit, you agree to our Terms & Conditions, Visitor Agreement and Privacy
+                      Policy.</small>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-row">
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal" id="msgModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{res['class']}}</h4>
+          <button type="button" class="close" (click)="closeModel()" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          {{res['msg']}}
+          {{res['error']}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModel()" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
