@@ -1,42 +1,72 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder , FormGroup, Validators, ValidationErrors } from '@angular/forms';
-import { AllService } from '../all.service';
-import { Router, ActivatedRoute } from '@angular/router'
-import * as $ from 'jquery';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ValidationErrors
+} from "@angular/forms";
+import { AllService } from "../all.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import * as $ from "jquery";
+import { Observable } from "rxjs";
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-
   rForm = {
-    FullName:'',
-    Email:'',
-    MobileNo:'',
-    State:'',
-    Comment:'',
-    Agree:''
-  }
+    FullName: "",
+    Email: "",
+    MobileNo: "",
+    State: "",
+    Comment: "",
+    Agree: ""
+  };
 
-
-  regF:FormGroup;
-  constructor(private _fb:FormBuilder,
-              private _ser:AllService,
-              private _ar:ActivatedRoute,
-              private _r:Router) {
+  regF: FormGroup;
+  constructor(
+    private _fb: FormBuilder,
+    private _ser: AllService,
+    private _ar: ActivatedRoute,
+    private _r: Router
+  ) {
     this.regF = this._fb.group({
-      FullName:['',[Validators.required,Validators.pattern("[a-zA-Z]{3,}[ ]{1}[a-zA-Z]{3,}")]],
-      Email:['',[Validators.required,Validators.pattern("[a-zA-Z0-9]{3,}[@]{1}[a-zA-Z0-9]{3,}[.]{1}[a-zA-Z0-9]{2,}")]],
-      MobileNo:['',[Validators.required,Validators.pattern("[0-9]{10}")]],
-      State:['',[Validators.required]],
-      Comment:['',[]],
-      Agree:['',[]]
-    })
+      FullName: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("[a-zA-Z]{3,}[ ]{1}[a-zA-Z]{3,}")
+        ]
+      ],
+      Email: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(
+            "[a-zA-Z0-9]{3,}[@]{1}[a-zA-Z0-9]{3,}[.]{1}[a-zA-Z0-9]{2,}"
+          )
+        ]
+      ],
+      MobileNo: ["", [Validators.required, Validators.pattern("[0-9]{10}")]],
+      State: ["", [Validators.required]],
+      Comment: ["", []],
+      Agree: ["", []]
+    });
   }
-
+  flag = false;
   ngOnInit() {
-    this.res = {}
+    this.res = {};
+    if (this._ar.snapshot.params.id != undefined) {
+      this.flag = true;
+      const id = this._ar.snapshot.params.id;
+      this._ser.getUser(id).subscribe(res => {
+        this.regF.patchValue(res);
+        //this.regF.controls['FullName'].patchValue(res['FullName'])
+      });
+    } else {
+      this.flag = false;
+    }
     // $(document).ready(function(){
     //   $('.pagination>.page-item').click(function(){
     //       $(this).addClass("gopal_active");
@@ -44,38 +74,59 @@ export class RegisterComponent implements OnInit {
     //     });
     //   });
   }
-  str ="";
+  str = "";
   getFormValidationErrors() {
     Object.keys(this.regF.controls).forEach(key => {
-    const controlErrors: ValidationErrors = this.regF.get(key).errors;
-    if (controlErrors != null) {
-          Object.keys(controlErrors).forEach(keyError => {
-            this.str +='Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError];
-          });
-        }
-      });
-    }
-  res;
-  Register(data){
-    //this.getFormValidationErrors()
-    this._ser.regiter(data).subscribe(
-      res=>{
-      console.log("Inner",res);
-      this.setResult(res)
-      },
-      error=>{
-        this.setResult(error);
+      const controlErrors: ValidationErrors = this.regF.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          (this.str +=
+            "Key control: " +
+            key +
+            ", keyError: " +
+            keyError +
+            ", err value: "),
+            controlErrors[keyError];
+        });
       }
-    )
+    });
   }
-  setResult(res){
-    this.res=res;
-    $('#msgModal').fadeIn(300);
+  res;
+  Register(data) {
+    //this.getFormValidationErrors()
+    if (this._ar.snapshot.params.id == undefined) {
+      this._ser.regiter(data).subscribe(
+        res => {
+          console.log("Inner", res);
+          this.setResult(res);
+        },
+        error => {
+          this.setResult(error);
+        }
+      );
+    } else {
+      data['id']=this._ar.snapshot.params.id;
+      this._ser.update(data).subscribe(
+        res => {
+          console.log("Inner", res);
+          this.setResult(res);
+        },
+        error => {
+          this.setResult(error);
+        }
+      );
+    }
+  }
+  setResult(res) {
+    this.res = res;
+    // $("#msgModal").fadeIn(300, function() {
+    //   this.closeModel();
+    // });
     //$('#msgModal').model('show');
     console.log(res);
   }
-  closeModel(){
-    $('#msgModal').fadeOut(300);
+  closeModel() {
+    $("#msgModal").fadeOut(300);
     this._r.navigate(["/home"]);
   }
 }

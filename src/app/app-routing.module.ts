@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:"home",component:HomeComponent},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
+  {path:'edit/:id',component:RegisterComponent},
   {path:"**", component:NotfoundComponent}
 ];
 
@@ -21,7 +22,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
   menus = GlobalMenus;
   constructor(){
       // for(let menu of this.menus){

@@ -80,9 +80,12 @@
 
             </div>
           </div>
-
-          <div class="form-row">
-            <button type="submit" class="btn btn-danger">Submit</button>
+          <!-- <input [formControl]="regF.controls['id']" name="id" type='hidden'> -->
+          <div class="form-row" *ngIf="flag==false">
+            <button type="submit" class="btn btn-danger" [class.btn-info]="regF.submitted" >Submit</button>
+          </div>
+          <div class="form-row" *ngIf="flag==true">
+            <button type="submit" class="btn btn-danger">Update</button>
           </div>
         </form>
       </div>
@@ -100,6 +103,7 @@
           {{res['msg']}}
           {{res['error']}}
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="closeModel()" data-dismiss="modal">Close</button>
         </div>
