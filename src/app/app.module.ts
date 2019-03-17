@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {DatePipe} from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +12,8 @@ import { AdminheaderComponent } from './adminheader/adminheader.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ViewComponent } from './view/view.component';
+import { KeysPipe } from './keys.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     AdminheaderComponent,
     HomeComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ViewComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

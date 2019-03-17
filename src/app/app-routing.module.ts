@@ -5,7 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { GlobalMenus } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-
+import { ViewComponent} from './view/view.component';
 
 
 const routes: Routes = [
@@ -13,6 +13,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:'edit/:id',component:RegisterComponent},
+  {path:'view/:id',component:ViewComponent},
   {path:"**", component:NotfoundComponent}
 ];
 

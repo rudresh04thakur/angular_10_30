@@ -1,0 +1,10 @@
+<div class="form col-6 offset-3">
+  <!-- <div class="form-group" *ngFor="let u of user | keys ">
+    <label>{{u['key']}}</label>
+    <div class="form-control">{{u['value']}}</div>
+  </div> -->
+  <div class="form-group" *ngFor="let u of keys ">
+      <label>{{u}}</label>
+      <div class="form-control">{{user[u]}}</div>
+    </div>
+</div>
