@@ -1,3 +1,11 @@
-<p>
-  login works!
-</p>
+<form class="form col-6 offset-3"  [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+  <div class="form-group">
+    <input [formControl]="loginForm.controls['email']" class="form-control" name="email" type="email" />
+  </div>
+  <div class="form-group">
+    <input [formControl]="loginForm.controls['password']" class="form-control" name="password" type="password" />
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-success">Login</button>
+  </div>
+</form>

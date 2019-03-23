@@ -14,6 +14,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewComponent } from './view/view.component';
 import { KeysPipe } from './keys.pipe';
+import {DataTableModule} from "angular-6-datatable";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { KeysPipe } from './keys.pipe';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTableModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

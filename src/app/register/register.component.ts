@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +9,7 @@ import {
 import { AllService } from "../all.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import * as $ from "jquery";
+import 'bootstrap';
 import { Observable } from "rxjs";
 @Component({
   selector: "app-register",
@@ -97,7 +99,7 @@ export class RegisterComponent implements OnInit {
     if (this._ar.snapshot.params.id == undefined) {
       this._ser.regiter(data).subscribe(
         res => {
-          console.log("Inner", res);
+          //console.log("Inner", res);
           this.setResult(res);
         },
         error => {
@@ -108,7 +110,7 @@ export class RegisterComponent implements OnInit {
       data['id']=this._ar.snapshot.params.id;
       this._ser.update(data).subscribe(
         res => {
-          console.log("Inner", res);
+          //console.log("Inner", res);
           this.setResult(res);
         },
         error => {
@@ -119,14 +121,15 @@ export class RegisterComponent implements OnInit {
   }
   setResult(res) {
     this.res = res;
-    // $("#msgModal").fadeIn(300, function() {
+    $("#msgModal").modal('show');
+    // $("#msgModal").fadeIn(3000, function() {
     //   this.closeModel();
     // });
-    //$('#msgModal').model('show');
-    console.log(res);
+    // $('#msgModal').model('show');
+    // console.log(res);
   }
   closeModel() {
-    $("#msgModal").fadeOut(300);
-    this._r.navigate(["/home"]);
+    //$("#msgModal").fadeOut(300);
+    //this._r.navigate(["/home"]);
   }
 }
