@@ -9,7 +9,9 @@ import { ViewComponent} from './view/view.component';
 
 
 const routes: Routes = [
-  {path:"home",component:HomeComponent},
+  {path:"home",component:HomeComponent,children:[
+    {path:'view/:id',component:ViewComponent},
+  ]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:'edit/:id',component:RegisterComponent},

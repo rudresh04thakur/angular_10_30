@@ -51,9 +51,13 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       MobileNo: ["", [Validators.required, Validators.pattern("[0-9]{10}")]],
-      State: ["", [Validators.required]],
       Comment: ["", []],
-      Agree: ["", []]
+      Agree: ["", []],
+      address:this._fb.group({
+        city:[''],
+        state:[''],
+        country:['']
+      })
     });
   }
   flag = false;
@@ -95,6 +99,7 @@ export class RegisterComponent implements OnInit {
   }
   res;
   Register(data) {
+    console.log(data);
     //this.getFormValidationErrors()
     if (this._ar.snapshot.params.id == undefined) {
       this._ser.regiter(data).subscribe(
