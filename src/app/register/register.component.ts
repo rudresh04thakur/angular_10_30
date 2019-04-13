@@ -14,7 +14,7 @@ import { Observable } from "rxjs";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"]
+  styleUrls: ["./register.component.css", "./progress.scss"]
 })
 export class RegisterComponent implements OnInit {
   rForm = {
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     Comment: "",
     Agree: ""
   };
-
+  selectedFile: File = null;
   regF: FormGroup;
   constructor(
     private _fb: FormBuilder,
@@ -50,6 +50,13 @@ export class RegisterComponent implements OnInit {
           )
         ]
       ],
+      Password: [
+        "",
+        [
+          Validators.required,
+        ]
+      ],
+      profile:'',
       MobileNo: ["", [Validators.required, Validators.pattern("[0-9]{10}")]],
       Comment: ["", []],
       Agree: ["", []],
@@ -99,12 +106,10 @@ export class RegisterComponent implements OnInit {
   }
   res;
   Register(data) {
-    console.log(data);
-    //this.getFormValidationErrors()
     if (this._ar.snapshot.params.id == undefined) {
       this._ser.regiter(data).subscribe(
         res => {
-          //console.log("Inner", res);
+          console.log("Inner", res);
           this.setResult(res);
         },
         error => {
@@ -137,4 +142,7 @@ export class RegisterComponent implements OnInit {
     //$("#msgModal").fadeOut(300);
     //this._r.navigate(["/home"]);
   }
+
+
+
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { AllService } from "../all.service";
 import { Router, ActivatedRoute } from "@angular/router";
+
 @Component({
-  selector: "app-view",
+  selector: "pp-view",
   templateUrl: "./view.component.html",
   styleUrls: ["./view.component.css"]
 })

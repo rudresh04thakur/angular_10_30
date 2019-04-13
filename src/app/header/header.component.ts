@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,Input } from '@angular/core';
+import { AllService } from '../all.service'
 export const GlobalMenus = [
   { title: "Home", path: 'home' },
   { title: "Login", path: 'login' },
@@ -24,7 +24,9 @@ export const GlobalMenus = [
 })
 export class HeaderComponent implements OnInit {
   menus = GlobalMenus;
-  constructor() {
+  @Input('un') un:any;
+
+  constructor(private _ser:AllService) {
 
   }
 
@@ -49,9 +51,13 @@ export class HeaderComponent implements OnInit {
   //   html += (isSub) ? '</div>' : '';
   //   console.log(html);
   // }
+username="";
 
   ngOnInit() {
+    console.log("Header = >",this.un);
+    this.username = this.un
     //this.buildList(this.menus,false);
+
   }
 
 }

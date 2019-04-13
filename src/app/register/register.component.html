@@ -30,7 +30,7 @@
           </div>
 
         </div>
-        <form [formGroup]="regF" (ngSubmit)="Register(regF.value)">
+        <form [formGroup]="regF" (ngSubmit)="Register(regF.value)" enctype="multipart/form-data">
           <div class="form-row">
             <div class="form-group col-md-6">
               <input id="Full Name" [formControl]="regF.controls['FullName']" name="FullName" placeholder="Full Name" class="form-control" type="text">
@@ -50,36 +50,33 @@
                 Invalid Mobile Number
               </div>
             </div>
-
-            <div class="form-group">
-              <label>Address</label>
-              <div class="col-md-6">
-                <select class="select form-control" [formControl]="regF.controls['address'].controls['city']">
-                  <option value="PN">Pune</option>
-                  <option value="NED">Nanded</option>
-                  <option value="NK">Nashik</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <select class="select form-control" [formControl]="regF.controls['address'].controls['state']">
-                  <option value="MH">Maharashtra</option>
-                  <option value="AP">Andra Pradesh</option>
-                  <option value="TN">Telangana</option>
-                </select>
-              </div>
-
-              <div class="col-md-12">
-                <select class="select form-control" [formControl]="regF.controls['address'].controls['country']">
-                  <option value="IND">India</option>
-                </select>
-              </div>
-
+          </div>
+          <div class="form-row">
+            <label>Address</label>
+            <div class="col-md-6">
+              <select class="select form-control" [formControl]="regF.controls['address'].controls['city']">
+                <option value="PN">Pune</option>
+                <option value="NED">Nanded</option>
+                <option value="NK">Nashik</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <select class="select form-control" [formControl]="regF.controls['address'].controls['state']">
+                <option value="MH">Maharashtra</option>
+                <option value="AP">Andra Pradesh</option>
+                <option value="TN">Telangana</option>
+              </select>
             </div>
 
-
-            <div class="form-group col-md-12">
-              <textarea id="comment" [formControl]="regF.controls['Comment']" name="Comment" cols="40" rows="5" class="form-control"></textarea>
+            <div class="col-md-12">
+              <select class="select form-control" [formControl]="regF.controls['address'].controls['country']">
+                <option value="IND">India</option>
+              </select>
             </div>
+
+          </div>
+          <div class="form-row col-md-12">
+            <textarea id="comment" [formControl]="regF.controls['Comment']" name="Comment" cols="40" rows="5" class="form-control"></textarea>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -125,3 +122,14 @@
       </div>
     </div>
   </div>
+  <div class="progress_1" [attr.dataPercentage]="res['message']">
+      <span class="progress-left">
+        <span class="progress-bar"></span>
+      </span>
+      <span class="progress-right">
+        <span class="progress-bar"></span>
+      </span>
+      <div class="progress-value">
+        <div>{{ res['message'] }}</div>
+      </div>
+    </div>

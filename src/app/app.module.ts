@@ -15,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ViewComponent } from './view/view.component';
 import { KeysPipe } from './keys.pipe';
 import {DataTableModule} from "angular-6-datatable";
-
+import { AccordionModule } from 'angular-admin-lte';
+import { ColorDirective } from './color.directive'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {DataTableModule} from "angular-6-datatable";
     HomeComponent,
     NotfoundComponent,
     ViewComponent,
-    KeysPipe
+    KeysPipe,
+    ColorDirective
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import {DataTableModule} from "angular-6-datatable";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTableModule
+    DataTableModule,
+    AccordionModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

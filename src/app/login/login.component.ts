@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { AllService } from '../all.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup
-  constructor(private _fb:FormBuilder, private _r:Router) {
+  constructor(private _fb:FormBuilder, private _r:Router,private _ser:AllService) {
     this.loginForm = this._fb.group({
       email:[],
       password:[]
@@ -20,8 +21,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(data){
-    console.log(data);
-    this._r.navigate(['register']);
+    this._ser.login(data).subscribe((res)=>{
+      if(res['class']=="success"){
+        localStorage.setItem("sid",res['user']['sid'])
+        //console.log(res['user']);
+        this._r.navigate(['/']);
+      }
+    })
+    //this._r.navigate(['register']);
 
   }
 }
