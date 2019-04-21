@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private _ser:AllService,private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this._ser.changeUrl("true");
     this.date = this.datePipe.transform('03/17/2019 04:30:34 UTC +0');
     this._ser.getUsers().subscribe((res)=>{
       this.users = res;

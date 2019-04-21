@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
+    this._ser.changeUrl("false");
+    // this._ser.isUrlSet.subscribe(url => {
+    //   //console.log("Service Loing url ",url)
+    // })
   }
 
   login(data){

@@ -1,12 +1,16 @@
-
 <!-- <div *ngIf="url in ['','menu',]" else="admin"> -->
- <app-header [un]="username"></app-header>
+<div *ngIf="url=='true'">
+  <app-header [un]="username"></app-header>
+</div>
 <!-- </div>
 <ng-template #admin> -->
-  <!-- <app-adminheader></app-adminheader> -->
+<!-- <app-adminheader></app-adminheader> -->
 <!-- </ng-template> -->
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<p *ngFor="let i of demoJson | keys">{{i['key']}} : {{i['value']}}</p>
+<div *ngIf="url=='true'">
+  <app-footer></app-footer>
+</div>
 <!-- <div class="modal" id="msgModal">
     <div class="modal-dialog">
       <div class="modal-content">

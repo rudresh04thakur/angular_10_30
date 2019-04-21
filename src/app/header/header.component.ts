@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { AllService } from '../all.service'
+import { AllService } from '../all.service';
+import { Router } from '@angular/router'
 export const GlobalMenus = [
   { title: "Home", path: 'home' },
   { title: "Login", path: 'login' },
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
   menus = GlobalMenus;
   @Input('un') un:any;
 
-  constructor(private _ser:AllService) {
+  constructor(private _ser:AllService, private _r:Router) {
 
   }
 
@@ -54,8 +55,19 @@ export class HeaderComponent implements OnInit {
 username="";
 
   ngOnInit() {
-    console.log("Header = >",this.un);
-    this.username = this.un
+    this._r.events.subscribe(()=>{
+      this._ser.checkLife(localStorage.getItem('sid')).subscribe((res)=>{
+        //console.log("Header = >",this.un);
+        console.log(res)
+        this.username = res['user']['FullName']
+        if(localStorage.getItem('sid')){
+          GlobalMenus[1]['title']="Logout";
+          GlobalMenus[1]['path']="logout";
+          document.cookie = `sid=${localStorage.getItem('sid')}; expires=Thu, 18 Dec 2013 12:00:00 UTC`;
+        }
+      })
+    })
+
     //this.buildList(this.menus,false);
 
   }

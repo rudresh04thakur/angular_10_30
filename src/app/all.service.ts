@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpEventType } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,13 @@ export class AllService {
           return `Unhandled event: ${event.type}`;
       }
     }))
+  }
+
+  private urlSource = new BehaviorSubject('true');
+  isUrlSet = this.urlSource.asObservable();
+
+  changeUrl(url: string) {
+    this.urlSource.next(url)
   }
 
   update(data){

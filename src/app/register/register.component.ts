@@ -69,6 +69,7 @@ export class RegisterComponent implements OnInit {
   }
   flag = false;
   ngOnInit() {
+    this._ser.changeUrl('false');
     this.res = {};
     if (this._ar.snapshot.params.id != undefined) {
       this.flag = true;
